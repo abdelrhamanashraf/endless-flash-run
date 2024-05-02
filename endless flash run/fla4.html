@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abtrel Game</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="icon" href="https://apache.org/favicons/android-chrome-192x192.png">
+</head>
+<style>
+   body{
+       margin: 0;
+       padding: 0;
+       background-image: url("https://image.freepik.com/free-vector/sky-sea-starry-night-background_105940-108.jpg");
+       text-align: center;
+   } 
+   .game{height: 400px; width: 800px; border: 1px solid black; margin: 10% auto auto auto ; background-image: url("https://static.vecteezy.com/system/resources/thumbnails/000/263/176/small/cartoon-desert-banner.jpg") ;
+   background-repeat: no-repeat; 
+background-size: cover;
+
+   }
+   #block{width: 40px; height: 70px; background-size: 40px 70px; position: relative; top: 233px; left: 760px; overflow:hidden; animation: block 2s infinite linear ;
+   background-image: url("https://cdn.discordapp.com/attachments/531851896743526411/859106416789946408/pngtree-desert-green-cactus-image_1233596-removebg-preview.png");
+   }
+   #flash{width: 50px ; height: 100px; background-image: url("https://media.discordapp.net/attachments/531851896743526411/859104818223775754/preview-removebg-preview.png");
+   background-size: 50px 100px;  
+    position: relative; top: 300px;}
+    .animation{
+        animation:jump 500ms;
+    }
+    @keyframes block{
+        0%{left:760px ;}
+        100%{left: 0.1px;}
+    }
+    @keyframes jump {
+        0%{top: 300px;}
+        30%{top:200px;}
+        70%{top:200px;}
+        100%{top:300px;}
+    }
+   #score{ margin-right: 75%; font-size: 3rem;
+  color: #DBEDF3;
+  font-family: "Arvo", cursive;
+  text-shadow: 3px 0 #5604da}
+  #title{
+      
+    font-size: 2rem;
+  color: #f3dbf2;
+  font-family: "Arvo", cursive;
+  text-shadow: 3px 0 #DA0463
+  }
+  footer {
+  color: #DBEDF3;
+  font-family: sans-serif;
+}
+.mental{background-image: url("https://cdn.discordapp.com/attachments/531851896743526411/859190892657246258/ezgif.com-gif-maker_1.gif"); background-size: 800px 400px; background-repeat: no-repeat;}
+</style>
+<body>
+    <h1 id="title">Press Space To Jump</h1>
+<div id="game" class="game">
+    <div id="flash"></div>
+    <div id="block"></div>
+</div>
+<p id="score">score: <span>0</span></p>
+<footer> Made with ❤️ By Boody</footer>
+
+
+
+
+
+    <script>
+        //controlls
+        var title=document.getElementById("title")
+var tlfan= document.getElementById("flash");
+var block=document.getElementById("block")
+document.addEventListener("keypress",function(Space){
+    if(Space.keyCode===32){tlfan.classList.add("animation")
+    setTimeout(function(){tlfan.classList.remove("animation")},500)}
+   var jumpsound= new Audio("https://cdn.discordapp.com/attachments/531851896743526411/859177817984073788/Cartoon_Jump_-_Sound_Effect.mp3");
+   jumpsound.play();
+})
+
+//score
+var time;
+var count = 0;
+function lemath()
+{    
+    count=count+100;
+    var scre=document.querySelector("span")
+    scre.innerHTML = count;
+}
+function begin()
+{
+    lemath();
+  time= setTimeout(begin, 2000, window);
+}
+document.addEventListener('DOMContentLoaded', function () {    
+    begin();
+});
+//phasics
+
+var chk=setInterval(function(){
+    var charatop=parseInt(window.getComputedStyle(tlfan).getPropertyValue("top"))
+    var blockleft=parseInt(window.getComputedStyle(block).getPropertyValue("left"))
+    if (blockleft<50 && blockleft>1 && charatop>=250) {
+        block.style.animation ="none";
+        block.style.display ="none";
+         clearTimeout(time);
+        title.innerText="Game Over"
+        var mado= new Audio("https://cdn.discordapp.com/attachments/531851896743526411/857035096489066556/video0_00_00_04-00_00_10.mp3");
+        mado.play();
+        var menal=document.getElementById("game");
+        menal.classList.add("mental");
+    }
+},5)
+    </script>
+
+</body>
+</html>
